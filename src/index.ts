@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import disassemble from './disassemble';
 
-const buffer = readFileSync('space_invaders_pal.a26');
+const buffer = readFileSync('./romfiles/space_invaders_pal.a26');
 
 const decodedInstructions = disassemble(buffer);
 

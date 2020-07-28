@@ -1,5 +1,6 @@
 import { decodedInstruction } from './interfaces';
 import { formatHex } from './util';
+import { STA_zpg } from './instructions';
  
 function decode (source : Uint8Array, programCounter : number) : decodedInstruction {
 
@@ -8,16 +9,9 @@ function decode (source : Uint8Array, programCounter : number) : decodedInstruct
     switch (opcode) {
 
         case 0x85:
-            let operand = formatHex(
-                source[programCounter + 1],
-                1
-            );
-            let instruction = `STA $${operand}`;
-            console.log(instruction);
-            return {
-                instruction: instruction,
-                opbytes: 2
-            }
+            let operand = source[programCounter + 1];
+            console.log(STA_zpg(programCounter, operand).instruction);
+            return STA_zpg(programCounter, operand);
 
         default:
             throw new Error(`Unknown opcode: 0x${formatHex(opcode, 1)}`);

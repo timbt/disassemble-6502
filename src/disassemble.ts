@@ -1,6 +1,9 @@
-interface decodedInstruction {
-    instruction: string,
-    opbytes: number
+import { decodedInstruction } from './interfaces';
+
+function formatHex(value : number, bytes : number) : string {
+
+    return value.toString(16).padStart(bytes * 2, '0');
+
 }
 
 function decode (source : Uint8Array, programCounter : number) : decodedInstruction {
@@ -10,7 +13,7 @@ function decode (source : Uint8Array, programCounter : number) : decodedInstruct
     switch (opcode) {
 
         default:
-            throw new Error(`Unknown opcode: ${opcode}`);
+            throw new Error(`Unknown opcode: 0x${formatHex(opcode, 1)}`);
 
     }
 

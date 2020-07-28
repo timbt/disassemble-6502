@@ -1,11 +1,6 @@
 import { decodedInstruction } from './interfaces';
-
-function formatHex(value : number, bytes : number) : string {
-
-    return value.toString(16).padStart(bytes * 2, '0');
-
-}
-
+import { formatHex } from './util';
+ 
 function decode (source : Uint8Array, programCounter : number) : decodedInstruction {
 
     let opcode = source[programCounter];

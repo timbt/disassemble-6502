@@ -1,6 +1,14 @@
 import { decodedInstruction } from './interfaces';
 import { formatHex } from './util';
 import { STA_zpg } from './instructions';
+
+function dumpInstructions(instructions : Array<string>) : void {
+    
+    for (let instruction of instructions) {
+        console.log(instruction);
+    }
+
+}
  
 function decode (source : Uint8Array, programCounter : number) : decodedInstruction {
 
@@ -10,7 +18,6 @@ function decode (source : Uint8Array, programCounter : number) : decodedInstruct
 
         case 0x85:
             let operand = source[programCounter + 1];
-            console.log(STA_zpg(programCounter, operand).instruction);
             return STA_zpg(programCounter, operand);
 
         default:
@@ -30,9 +37,19 @@ function disassemble(codeBuffer : ArrayBuffer) : Array<string> {
 
     while (programCounter < source.length) {
 
-        let decodeResult = decode(source, programCounter);
-        instructions.push(decodeResult.instruction);
-        programCounter += decodeResult.opbytes;
+        try {
+
+            let decodeResult = decode(source, programCounter);
+            instructions.push(decodeResult.instruction);
+            programCounter += decodeResult.opbytes;
+
+
+        } catch (error) {
+
+            dumpInstructions(instructions);
+            throw error;
+
+        }
 
     }
 

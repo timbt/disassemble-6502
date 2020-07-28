@@ -24,7 +24,8 @@ function formatInstructionLine(
 export function STA_zpg(programCounter : number, operand: number) : decodedInstruction {
 
     let instruction = `STA $${formatHex(operand, 1)}`;
-    let hexValues = new Uint8Array([0x85, operand]);
+    const instructionValue = 0x85;
+    let hexValues = new Uint8Array([instructionValue, operand]);
     return {
         instruction: formatInstructionLine(programCounter, hexValues, instruction),
         opbytes: 2

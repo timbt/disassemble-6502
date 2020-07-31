@@ -1,7 +1,7 @@
 /**
- * Returns a formated string representing a hexidecimal number.
+ * Returns a formatted string representing a hexadecimal number.
  * 
- * @param value - The number to be formated 
+ * @param value - The number to be formatted 
  * @param bytes - The minimum number of bytes that should be represented in
  * the string. This is used for zero-padding.
  * 
